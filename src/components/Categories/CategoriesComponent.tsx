@@ -9,7 +9,7 @@ import Category from '../../types/categoryTypes'
 import env from '../../config/env.config'
 
 // Styles
-import './CategoriesStyles.css'
+import { CategoriesContainer, CategoryContent } from './CategoriesStyles'
 
 export const Categories = () => {
   const [categories, setCategories] = useState<Category[]>([])
@@ -31,14 +31,14 @@ export const Categories = () => {
   }, [])
 
   return (
-    <div className="categories-container">
-      <div className="categories-content">
+    <CategoriesContainer>
+      <CategoryContent>
         {categories.map((category) => (
           <div key={category.id}>
             <CategoryItem category={category} />
           </div>
         ))}
-      </div>
-    </div>
+      </CategoryContent>
+    </CategoriesContainer>
   )
 }
