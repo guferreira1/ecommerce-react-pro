@@ -6,8 +6,6 @@ import {
   HeaderTitle
 } from './headerStyles'
 
-// import './headerStyles.css'
-
 export const Header = () => {
   return (
     <HeaderContainer>
