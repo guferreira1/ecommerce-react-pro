@@ -2,6 +2,12 @@ import { BsGoogle } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
 import validator from 'validator'
+import {
+  AuthError,
+  AuthErrorCodes,
+  signInWithEmailAndPassword
+} from 'firebase/auth'
+import { auth } from '../../config/firebase.config'
 
 // Components
 import { CustomButton } from '../../components/CustomButton/CustomButtonComponent'
@@ -26,11 +32,31 @@ interface LoginForm {
 export const LoginPage = () => {
   const {
     register,
-    formState: { errors },
-    handleSubmit
+    handleSubmit,
+    setError,
+    formState: { errors }
   } = useForm<LoginForm>()
 
-  const handleSubmitPress = (data: any) => {}
+  const handleSubmitPress = async (data: LoginForm) => {
+    try {
+      const userCredentials = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      )
+      console.log(userCredentials)
+    } catch (error) {
+      const _error = error as AuthError
+
+      if (_error.code === AuthErrorCodes.INVALID_PASSWORD) {
+        return setError('password', { type: 'mismatch' })
+      }
+
+      if (_error.code === AuthErrorCodes.USER_DELETED) {
+        return setError('email', { type: 'notfound' })
+      }
+    }
+  }
 
   return (
     <>
@@ -60,6 +86,11 @@ export const LoginPage = () => {
             {errors?.email?.type === 'required' && (
               <InputErrorMessage>O e-mail é obrigatório</InputErrorMessage>
             )}
+
+            {errors?.email?.type === 'notfound' && (
+              <InputErrorMessage>E-mail inválido</InputErrorMessage>
+            )}
+
             {errors?.email?.type === 'validate' && (
               <InputErrorMessage>
                 Por favor, insira um e-mail válido
@@ -77,6 +108,10 @@ export const LoginPage = () => {
             />
             {errors?.password?.type === 'required' && (
               <InputErrorMessage>A senha é obrigatória</InputErrorMessage>
+            )}
+
+            {errors?.password?.type === 'mismatch' && (
+              <InputErrorMessage>Senha invalida</InputErrorMessage>
             )}
           </LoginInputContainer>
 
