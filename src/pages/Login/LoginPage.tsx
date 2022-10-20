@@ -1,3 +1,5 @@
+import { useEffect, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { BsGoogle } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
@@ -27,6 +29,7 @@ import {
 
 // Utilities
 import { auth, db, googleProvider } from '../../config/firebase.config'
+import { UserContext } from '../../contexts/userContext'
 
 interface LoginForm {
   email: string
@@ -40,6 +43,16 @@ export const LoginPage = () => {
     setError,
     formState: { errors }
   } = useForm<LoginForm>()
+
+  const { isAuthenticated } = useContext(UserContext)
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/')
+    }
+  }, [isAuthenticated])
 
   const handleSubmitPress = async (data: LoginForm) => {
     try {
