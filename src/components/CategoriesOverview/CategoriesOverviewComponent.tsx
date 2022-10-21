@@ -4,10 +4,10 @@ import { FunctionComponent, useContext, useEffect } from 'react'
 import { Container } from './CategoriesOverviewStyles'
 
 // Components
-import { CategoryOverview } from '../../CategoryOverview/CategoryOverviewComponent'
+import { CategoryOverview } from '../CategoryOverview/CategoryOverviewComponent'
 
 // Styles
-import { CategoryContext } from '../../../contexts/categoryContext'
+import { CategoryContext } from '../../contexts/categoryContext'
 
 export const CategoriesOverview: FunctionComponent = () => {
   const { categories, fetchCategories } = useContext(CategoryContext)
