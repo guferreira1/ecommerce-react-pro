@@ -5,18 +5,21 @@ import { Container } from './CategoriesOverviewStyles'
 
 // Components
 import { CategoryOverview } from '../CategoryOverview/CategoryOverviewComponent'
+import { Loading } from '../loading/loadingComponent'
 
 // Styles
 import { CategoryContext } from '../../contexts/categoryContext'
 
 export const CategoriesOverview: FunctionComponent = () => {
-  const { categories, fetchCategories } = useContext(CategoryContext)
+  const { categories, isLoading, fetchCategories } = useContext(CategoryContext)
 
   useEffect(() => {
     if (categories.length === 0) {
       fetchCategories()
     }
   }, [])
+
+  if (isLoading) return <Loading />
 
   return (
     <Container>
