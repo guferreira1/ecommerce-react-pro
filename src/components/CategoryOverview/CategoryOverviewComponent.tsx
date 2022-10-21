@@ -10,6 +10,9 @@ import {
 // Utilities
 import Category from '../../types/categoryTypes'
 
+// Components
+import { ProductItem } from '../ProductItem/ProductItemComponent'
+
 interface CategoryOverviewProps {
   category: Category
 }
@@ -21,7 +24,11 @@ export const CategoryOverview: FunctionComponent<CategoryOverviewProps> = ({
     <CategoryContainer>
       <CategoryTitle>{category.displayName}</CategoryTitle>
 
-      <ProductsContainer></ProductsContainer>
+      <ProductsContainer>
+        {category.products.slice(0, 4).map((product) => (
+          <ProductItem key={product.id} product={product} />
+        ))}
+      </ProductsContainer>
     </CategoryContainer>
   )
 }
