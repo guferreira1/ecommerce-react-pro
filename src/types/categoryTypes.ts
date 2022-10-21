@@ -1,4 +1,4 @@
-import { Product } from './productTyeps'
+import { Product } from './productTypes'
 
 interface Category {
   id: string

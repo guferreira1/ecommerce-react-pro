@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 
 // Utilities
-import { Product } from '../../types/productTyeps'
+import { Product } from '../../types/productTypes'
 
 // Styles
 import {
