@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BsGoogle } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
@@ -17,6 +17,7 @@ import { CustomButton } from '../../components/CustomButton/CustomButtonComponen
 import { CustomInput } from '../../components/CustomInput/CustomInputComponent'
 import { Header } from '../../components/Header/headerComponent'
 import { InputErrorMessage } from '../../components/InputErrorMessage/InputErrorMessageComponent'
+import { Loading } from '../../components/loading/loadingComponent'
 
 // Styles
 import {
@@ -44,6 +45,8 @@ export const LoginPage = () => {
     formState: { errors }
   } = useForm<LoginForm>()
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const { isAuthenticated } = useContext(UserContext)
 
   const navigate = useNavigate()
@@ -56,6 +59,7 @@ export const LoginPage = () => {
 
   const handleSubmitPress = async (data: LoginForm) => {
     try {
+      setIsLoading(true)
       const userCredentials = await signInWithEmailAndPassword(
         auth,
         data.email,
@@ -72,10 +76,14 @@ export const LoginPage = () => {
       if (_error.code === AuthErrorCodes.USER_DELETED) {
         return setError('email', { type: 'notfound' })
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
   const handleSignInWithGooglePress = async () => {
+    setIsLoading(true)
+
     try {
       const userCredentials = await signInWithPopup(auth, googleProvider)
 
@@ -102,11 +110,15 @@ export const LoginPage = () => {
       }
     } catch (error) {
       console.log(error)
+    } finally {
+      setIsLoading(false)
     }
   }
   return (
     <>
       <Header />
+
+      {isLoading && <Loading />}
 
       <LoginContainer>
         <LoginContent>
