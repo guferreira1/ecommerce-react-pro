@@ -7,11 +7,14 @@ import { collection, getDocs, query, where } from 'firebase/firestore'
 import { HomePage } from './pages/Home/homePage'
 import { LoginPage } from './pages/Login/LoginPage'
 import { SignUpPage } from './pages/SignUp/SignUpPage'
+import { ExplorePage } from './pages/Explore/explorePage'
 
 // Utilities
 import { auth, db } from './config/firebase.config'
 import { UserContext } from './contexts/userContext'
 import { userConverter } from './converters/firestore.converters'
+
+// Components
 import { Loading } from './components/loading/loadingComponent'
 
 const App: FunctionComponent = () => {
@@ -49,6 +52,7 @@ const App: FunctionComponent = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/explore" element={<ExplorePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
       </Routes>
