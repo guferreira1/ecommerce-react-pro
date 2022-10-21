@@ -8,6 +8,7 @@ import { HomePage } from './pages/Home/homePage'
 import { LoginPage } from './pages/Login/LoginPage'
 import { SignUpPage } from './pages/SignUp/SignUpPage'
 import { ExplorePage } from './pages/Explore/explorePage'
+import { CategoryDetailsPage } from './pages/CategoryDetails/CategoryDetails'
 
 // Utilities
 import { auth, db } from './config/firebase.config'
@@ -53,6 +54,7 @@ const App: FunctionComponent = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/explore" element={<ExplorePage />} />
+        <Route path="/category/:id" element={<CategoryDetailsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
       </Routes>
