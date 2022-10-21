@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FiLogIn } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
@@ -19,6 +19,7 @@ import { CustomButton } from '../../components/CustomButton/CustomButtonComponen
 import { CustomInput } from '../../components/CustomInput/CustomInputComponent'
 import { Header } from '../../components/Header/headerComponent'
 import { InputErrorMessage } from '../../components/InputErrorMessage/InputErrorMessageComponent'
+import { Loading } from '../../components/loading/loadingComponent'
 
 // Styles
 import {
@@ -45,6 +46,8 @@ export const SignUpPage = () => {
     formState: { errors }
   } = useForm<SignUpForm>()
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const watchPassword = watch('password')
 
   const { isAuthenticated } = useContext(UserContext)
@@ -58,6 +61,8 @@ export const SignUpPage = () => {
   }, [isAuthenticated])
 
   const handleSubmitPress = async (data: SignUpForm) => {
+    setIsLoading(true)
+
     try {
       const userCredentials = await createUserWithEmailAndPassword(
         auth,
@@ -78,12 +83,17 @@ export const SignUpPage = () => {
       if (_error.code === AuthErrorCodes.EMAIL_EXISTS) {
         return setError('email', { type: 'alreadyInUse' })
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return (
     <>
       <Header />
+
+      {isLoading && <Loading />}
+
       <SignUpContainer>
         <SignUpContent>
           <SignUpHeadline>Crie sua conta</SignUpHeadline>
