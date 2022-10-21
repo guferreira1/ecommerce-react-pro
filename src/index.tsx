@@ -6,12 +6,15 @@ import reportWebVitals from './reportWebVitals'
 
 import { UserContextProvider } from './contexts/userContext'
 import { CategoryContextProvider } from './contexts/categoryContext'
+import { CartContextProvider } from './contexts/CartContext'
 
 ReactDOM.render(
   <React.StrictMode>
     <UserContextProvider>
       <CategoryContextProvider>
-        <App />
+        <CartContextProvider>
+          <App />
+        </CartContextProvider>
       </CategoryContextProvider>
     </UserContextProvider>
   </React.StrictMode>,
