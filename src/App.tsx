@@ -10,6 +10,7 @@ import { SignUpPage } from './pages/SignUp/SignUpPage'
 import { ExplorePage } from './pages/Explore/explorePage'
 import { CategoryDetailsPage } from './pages/CategoryDetails/CategoryDetails'
 import { CheckoutPage } from './pages/Checkout/CheckoutPage'
+import { PaymentConfirmationPage } from './pages/PaymentConfirmation/PaymentConfirmation'
 
 // Utilities
 import { auth, db } from './config/firebase.config'
@@ -65,6 +66,10 @@ const App: FunctionComponent = () => {
               <CheckoutPage />
             </AuthenticationGuard>
           }
+        />
+        <Route
+          path="/payment-confirmation"
+          element={<PaymentConfirmationPage />}
         />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
