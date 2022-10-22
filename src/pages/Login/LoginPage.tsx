@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BsGoogle } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
@@ -11,6 +11,7 @@ import {
   signInWithPopup
 } from 'firebase/auth'
 import { addDoc, collection, getDocs, query, where } from 'firebase/firestore'
+import { useSelector } from 'react-redux'
 
 // Components
 import { CustomButton } from '../../components/CustomButton/CustomButtonComponent'
@@ -30,7 +31,6 @@ import {
 
 // Utilities
 import { auth, db, googleProvider } from '../../config/firebase.config'
-import { UserContext } from '../../contexts/userContext'
 
 interface LoginForm {
   email: string
@@ -47,7 +47,9 @@ export const LoginPage = () => {
 
   const [isLoading, setIsLoading] = useState(false)
 
-  const { isAuthenticated } = useContext(UserContext)
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer
+  )
 
   const navigate = useNavigate()
 

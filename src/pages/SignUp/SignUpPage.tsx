@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FiLogIn } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
@@ -9,10 +9,10 @@ import {
   AuthErrorCodes
 } from 'firebase/auth'
 import { addDoc, collection } from 'firebase/firestore'
+import { useSelector } from 'react-redux'
 
 // Utilities
 import { auth, db } from '../../config/firebase.config'
-import { UserContext } from '../../contexts/userContext'
 
 // Components
 import { CustomButton } from '../../components/CustomButton/CustomButtonComponent'
@@ -50,7 +50,9 @@ export const SignUpPage = () => {
 
   const watchPassword = watch('password')
 
-  const { isAuthenticated } = useContext(UserContext)
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer
+  )
 
   const navigate = useNavigate()
 
