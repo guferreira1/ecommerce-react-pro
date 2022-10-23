@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 // Utilities
 import { auth } from '../../config/firebase.config'
 import { CartContext } from '../../contexts/CartContext'
+import { logoutUser } from '../../store/reducers/user/user.actions'
 
 // Styles
 import {
@@ -44,7 +45,7 @@ export const Header = () => {
   }
 
   const hndleSignOutClick = () => {
-    dispatch({ type: 'LOGOUT_USER' })
+    dispatch(logoutUser())
     signOut(auth)
   }
 
