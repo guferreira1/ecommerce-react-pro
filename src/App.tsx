@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { collection, getDocs, query, where } from 'firebase/firestore'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 // Pages
 import { HomePage } from './pages/Home/homePage'
@@ -17,6 +17,7 @@ import { PaymentConfirmationPage } from './pages/PaymentConfirmation/PaymentConf
 import { auth, db } from './config/firebase.config'
 import { userConverter } from './converters/firestore.converters'
 import { loginUser, logoutUser } from './store/reducers/user/user.actions'
+import { useAppSelector } from './hooks/redux.hooks'
 
 // Components
 import { Loading } from './components/loading/loadingComponent'
@@ -28,8 +29,8 @@ const App: FunctionComponent = () => {
 
   const dispatch = useDispatch()
 
-  const { isAuthenticated } = useSelector(
-    (rootReducer: any) => rootReducer.userReducer
+  const { isAuthenticated } = useAppSelector(
+    (rootReducer) => rootReducer.userReducer
   )
 
   useEffect(() => {

@@ -11,7 +11,6 @@ import {
   signInWithPopup
 } from 'firebase/auth'
 import { addDoc, collection, getDocs, query, where } from 'firebase/firestore'
-import { useSelector } from 'react-redux'
 
 // Components
 import { CustomButton } from '../../components/CustomButton/CustomButtonComponent'
@@ -31,6 +30,7 @@ import {
 
 // Utilities
 import { auth, db, googleProvider } from '../../config/firebase.config'
+import { useAppSelector } from '../../hooks/redux.hooks'
 
 interface LoginForm {
   email: string
@@ -47,8 +47,8 @@ export const LoginPage = () => {
 
   const [isLoading, setIsLoading] = useState(false)
 
-  const { isAuthenticated } = useSelector(
-    (rootReducer: any) => rootReducer.userReducer
+  const { isAuthenticated } = useAppSelector(
+    (rootReducer) => rootReducer.userReducer
   )
 
   const navigate = useNavigate()
