@@ -1,9 +1,10 @@
 import axios from 'axios'
-import { FunctionComponent, useContext, useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 import { BsBagCheck } from 'react-icons/bs'
 
 // Utilities
-import { CartContext } from '../../contexts/CartContext'
+import { useAppSelector } from '../../hooks/redux.hooks'
+import { selectProductsTotalPrice } from '../../store/reducers/cart/cart.selectors'
 
 // Components
 import { CartItemComponent } from '../CartItem/CartItemComponent'
@@ -19,7 +20,9 @@ import {
 } from './CheckoutStyles'
 
 export const Checkout: FunctionComponent = () => {
-  const { products, productsTotalPrice } = useContext(CartContext)
+  const { products } = useAppSelector((state) => state.cartReducer)
+
+  const productsTotalPrice = useAppSelector(selectProductsTotalPrice)
 
   const [isLoading, setIsLoadind] = useState(false)
 
