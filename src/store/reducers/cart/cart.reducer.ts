@@ -1,5 +1,6 @@
 import { CartProducts } from '../../../types/CartTypes'
 import { CartActionTypes } from './cart.action-types'
+import { CartActions } from './cart.actions'
 
 interface InitialState {
   isVisible: boolean
@@ -11,7 +12,10 @@ const initialState: InitialState = {
   products: []
 }
 
-export const cartReducer = (state = initialState, action: any) => {
+export const cartReducer = (
+  state = initialState,
+  action: CartActions
+): InitialState => {
   switch (action.type) {
     case CartActionTypes.toggleCart:
       return { ...state, isVisible: !state.isVisible }
