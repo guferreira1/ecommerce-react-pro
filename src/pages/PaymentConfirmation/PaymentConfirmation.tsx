@@ -13,7 +13,7 @@ import { CustomButton } from '../../components/CustomButton/CustomButtonComponen
 
 // Utilities
 import Colors from '../../Theme/themeColors'
-import { clearCartProducts } from '../../store/reducers/cart/cart.actions'
+import { clearCartProducts } from '../../store/toolkit/cart/cart.slice'
 
 // Styles
 import {

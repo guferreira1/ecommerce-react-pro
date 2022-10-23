@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 
 // Utilities
 import { Product } from '../../types/productTypes'
-import { addProductToCart } from '../../store/reducers/cart/cart.actions'
+import { addProductToCart } from '../../store/toolkit/cart/cart.slice'
 
 // Components
 import { CustomButton } from '../CustomButton/CustomButtonComponent'
