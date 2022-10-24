@@ -17,6 +17,10 @@ export const ProductInfo = styled.div`
     font-size: 1rem;
     font-weight: 500;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 
 export const ProductImage = styled.div<ProductImageProps>`
@@ -47,5 +51,9 @@ export const ProductImage = styled.div<ProductImageProps>`
       visibility: visible;
       opacity: 1;
     }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `
